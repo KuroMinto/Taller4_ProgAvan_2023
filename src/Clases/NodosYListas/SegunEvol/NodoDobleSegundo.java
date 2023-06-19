@@ -6,6 +6,10 @@ public class NodoDobleSegundo {
     private NodoDobleSegundo next;
     private NodoDobleSegundo previous;
 
+    /**
+     *
+     * @param pokemon
+     */
     public NodoDobleSegundo(PokemonSegundaEvol pokemon) {
         this.pokemon = pokemon;
         this.next = null;

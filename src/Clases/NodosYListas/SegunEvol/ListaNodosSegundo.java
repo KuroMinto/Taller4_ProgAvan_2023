@@ -25,22 +25,4 @@ public class ListaNodosSegundo {
         nuevoNodo.setPrevious(this.tail);
         this.tail = nuevoNodo;
     }
-
-    public void recorrerAdelante() {
-        NodoDobleSegundo aux = this.head;
-        while(aux != null) {
-            System.out.println(aux.getPokemon());
-            aux = aux.getNext();
-        }
-        return;
-    }
-
-    public void recorrerAtras() {
-        NodoDobleSegundo aux = this.tail;
-        while (aux != null) {
-            System.out.println(aux.getPokemon());
-            aux = aux.getPrevious();
-        }
-        return;
-    }
 }

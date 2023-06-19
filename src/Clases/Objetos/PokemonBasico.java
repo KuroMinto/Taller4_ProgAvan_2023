@@ -8,6 +8,17 @@ public class PokemonBasico extends Pokemon{
     private String siguienteEvol2;
     private String siguienteEvol3;
 
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param etapa
+     * @param tipo1
+     * @param tipo2
+     * @param siguienteEvol1
+     * @param siguienteEvol2
+     * @param siguienteEvol3
+     */
     public PokemonBasico(String id, String nombre, String etapa, String tipo1, String tipo2, String siguienteEvol1, String siguienteEvol2, String siguienteEvol3) {
         super(id, nombre, etapa, tipo1, tipo2);
         this.siguienteEvol1 = siguienteEvol1;

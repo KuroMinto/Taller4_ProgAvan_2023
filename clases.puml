@@ -1,5 +1,155 @@
 @startuml
-'https://plantuml.com/class-diagram
+class SistemaImpl {
+--Constructor--
++SistemaImpl()
+}
+
+interface Sistema {
++cargar(): LinkedList<String>
++cargarPokemonesBasico(LinkedList<String> listaCargada): ListaNodosBasico
++cargarPokemonesPrimera(LinkedList<String> listaCargada): ListaNodosPrimera
++cargarPokemonesSegunda(LinkedList<String> listaCargada): ListaNodosSegundo
++desplegarDesdeRango(int rangoMaximo, LinkedList<String> listaCargada): LinkedList<String>
+}
+
+abstract Pokemon {
+-id
+-nombre
+-etapa
+-tipo1
+-tipo2
+--Constructor--
++Pokemon(String id, String nombre, String etapa, String tipo1, String tipo2)
+--Getters && Setters
++getId()
++getNombre()
++getEtapa()
++getTipo1()
+getTipo2()
+}
+class pokemonBasico {
+-siguienteEvol1()
+-siguienteEvol2()
+-siguienteEvol3()
+--Constructor--
++PokemonBasico(String id, String nombre, String etapa, String tipo1, String tipo2, String siguienteEvol1, String siguienteEvol2, String siguienteEvol3)
+--Getters && Setters--
++getSiguienteEvol1()
++setSiguienteEvol1()
++getSiguienteEvol2()
++setSiguienteEvol2()
++getSiguienteEvol3()
++setSiguienteEvol3()
+}
+
+class pokemonPrimeraEvol {
+-siguienteEvol()
+-involucion()
+--Constructor--
++PokemonPrimeraEvol(String id, String nombre, String etapa, String tipo1, String tipo2, String siguienteEvol, String involucion)
+--Getters && Setters--
++getSiguienteEvol()
++setSiguienteEvol()
++getInvolucion()
++setInvolucion()
+}
+
+class pokemonSegundaEvol {
+-involucion1()
+-involucion2()
+--Constructor--
++PokemonSegundaEvol(String id, String nombre, String etapa, String tipo1, String tipo2, String involucion1, String involucion2)
+--Getters && Setters--
++getInvolucion1()
++setInvolucion1()
++getInvolucion2()
++setInvolucion2()
+}
+
+class ListaNodosBasico {
+-head(): NodoDobleBasico
+-tail(): NodoDobleBasico
+--Constructor--
++ListaNodosBasico()
+--Metodos--
++insertarAlFinalConCola(PokemonBasico pokemon): void
+}
+class NodoDobleBasico {
+-pokemon(): PokemonBasico
+-next(): NodoDobleBasico
+-previous(): NodoDobleBasico
+--Constructor--
++NodoDobleBasico(PokemonBasico pokemon)
+--Getters && Setters--
++getPokemon(): PokemonBasico
++setPokemon(): void
++getNext(): NodoDobleBasico
++setNext(): void
++getPrevious(): NodoDobleBasico
+setPrevious(): void
+}
+
+class ListaNodosPrimera {
+-head(): NodoDoblePrimera
+-tail(): NodoDoblePrimera
+--Constructor--
++ListaNodosPrimera()
+--Metodos--
++insertarAlFinalConCola(PokemonPrimeraEvol pokemon): void
+}
+class NodoDoblePrimera {
+-pokemon(): PokemonPrimeraEvol
+-next(): NodoDoblePrimera
+-previous(): NodoDoblePrimera
+--Constructor--
++NodoDoblePrimera(PokemonPrimeraEvol pokemon)
+--Getters && Setters--
++getPokemon(): PokemonPrimeraEvol
++setPokemon(): void
++getNext(): NodoDoblePrimera
++setNext(): void
++getPrevious(): NodoDoblePrimera
+setPrevious(): void
+}
+
+class ListaNodosSegundo {
+-head(): NodoDobleSegundo
+-tail(): NodoDobleSegundo
+--Constructor--
++ListaNodosSegundo()
+--Metodos--
++insertarAlFinalConCola(PokemonSegundaEvol pokemon): void
+}
+class NodoDobleSegundo {
+-pokemon(): PokemonSegundaEvol
+-next(): NodoDobleSegundo
+-previous(): NodoDobleSegundo
+--Constructor--
++NodoDobleSegundo(PokemonSegundaEvol pokemon)
+--Getters && Setters--
++getPokemon(): PokemonSegundaEvol
++setPokemon(): void
++getNext(): NodoDobleSegundo
++setNext(): void
++getPrevious(): NodoDobleSegundo
+setPrevious(): void
+}
+
+Sistema "1" ..|> "1" SistemaImpl: Implementa
+SistemaImpl "1" --> "1" ListaNodosBasico: Controla
+SistemaImpl "1" --> "1" ListaNodosPrimera: Controla
+SistemaImpl "1" --> "1" ListaNodosSegundo: Controla
+ListaNodosBasico "1" *-- "1.." NodoDobleBasico: Contiene
+ListaNodosPrimera "1" *-- "1.." NodoDoblePrimera: Contiene
+ListaNodosSegundo "1" *-- "1.." NodoDobleSegundo: Contiene
+
+Pokemon <|-- pokemonBasico: Es
+Pokemon <|-- pokemonPrimeraEvol: Es
+Pokemon <|-- pokemonSegundaEvol: Es
+
+NodoDobleBasico "1" *-- "1" Pokemon: Almacena
+NodoDoblePrimera "1" *-- "1" Pokemon: Almacena
+NodoDobleSegundo "1" *-- "1" Pokemon: Almacena
 
 
 }

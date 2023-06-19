@@ -25,22 +25,4 @@ public class ListaNodosBasico {
         nuevoNodo.setPrevious(this.tail);
         this.tail = nuevoNodo;
     }
-
-    public void recorrerAdelante() {
-        NodoDobleBasico aux = this.head;
-        while(aux != null) {
-            System.out.println(aux.getPokemon());
-            aux = aux.getNext();
-        }
-        return;
-    }
-
-    public void recorrerAtras() {
-        NodoDobleBasico aux = this.tail;
-        while (aux != null) {
-            System.out.println(aux.getPokemon());
-            aux = aux.getPrevious();
-        }
-        return;
-    }
 }

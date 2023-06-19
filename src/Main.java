@@ -65,7 +65,7 @@ public class Main {
             case "5":
                 break;*/
             default:
-                throw new ArrayIndexOutOfBoundsException("Se ha especificado una opcion no valida.");
+                throw new ArrayIndexOutOfBoundsException("Se ha especificado una opcion no valida o la funcionalidad no existe.");
         }
 
 

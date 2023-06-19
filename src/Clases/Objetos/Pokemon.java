@@ -7,6 +7,14 @@ abstract class Pokemon {
     private final String tipo1;
     private final String tipo2;
 
+    /**
+     *
+     * @param id
+     * @param nombre
+     * @param etapa
+     * @param tipo1
+     * @param tipo2
+     */
     public Pokemon(String id, String nombre, String etapa, String tipo1, String tipo2) {
         this.id = id;
         this.nombre = nombre;

@@ -25,22 +25,4 @@ public class ListaNodosPrimera {
         nuevoNodo.setPrevious(this.tail);
         this.tail = nuevoNodo;
     }
-
-    public void recorrerAdelante() {
-        NodoDoblePrimera aux = this.head;
-        while(aux != null) {
-            System.out.println(aux.getPokemon());
-            aux = aux.getNext();
-        }
-        return;
-    }
-
-    public void recorrerAtras() {
-        NodoDoblePrimera aux = this.tail;
-        while (aux != null) {
-            System.out.println(aux.getPokemon());
-            aux = aux.getPrevious();
-        }
-        return;
-    }
 }

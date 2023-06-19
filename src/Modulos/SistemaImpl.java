@@ -12,12 +12,16 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class SistemaImpl implements Sistema{
+public class SistemaImpl implements Sistema {
 
     public SistemaImpl() {
     }
 
-
+    /**
+     * @return
+     * @throws IOException
+     * @description Metodo para cargar la lista de pokemones del archivo "kanto.txt"
+     */
     @Override
     public LinkedList<String> cargar() throws IOException {
 
@@ -36,6 +40,12 @@ public class SistemaImpl implements Sistema{
         return lista;
     }
 
+    /**
+     * @description metodo para cargar todos los pokemones en etapa básica a una lista de nodos con la clase pokemon básico
+     * @param listaCargada
+     * @return
+     * @throws IOException
+     */
     @Override
     public ListaNodosBasico cargarPokemonesBasico(LinkedList<String> listaCargada) throws IOException {
         ListaNodosBasico listaNodosBasico = new ListaNodosBasico();
@@ -83,6 +93,12 @@ public class SistemaImpl implements Sistema{
         return listaNodosBasico;
     }
 
+    /**
+     * @Desc metodo para cargar todos los pokemones en etapa de primera evolucion a una lista de nodos con la clase pokemon Primera Evolucion
+     * @param listaCargada
+     * @return
+     * @throws IOException
+     */
     @Override
     public ListaNodosPrimera cargarPokemonesPrimera(LinkedList<String> listaCargada) throws IOException {
         ListaNodosPrimera listaNodosPrimera = new ListaNodosPrimera();
@@ -116,6 +132,12 @@ public class SistemaImpl implements Sistema{
         return listaNodosPrimera;
     }
 
+    /**
+     * @Desc metodo para cargar todos los pokemones en etapa de segunda evolucion a una lista de nodos con la clase pokemon Segunda Evolucion
+     * @param listaCargada
+     * @return
+     * @throws IOException
+     */
     @Override
     public ListaNodosSegundo cargarPokemonesSegunda(LinkedList<String> listaCargada) throws IOException {
         ListaNodosSegundo listaNodosSegundo = new ListaNodosSegundo();
@@ -150,6 +172,14 @@ public class SistemaImpl implements Sistema{
         return listaNodosSegundo;
     }
 
+    /**
+     * @Desc Metodo para desplegar los pokemons de la lista en un cierto rango, y ordenados por su ID.
+     * @param rangoMaximo
+     * @param listaCargada
+     * @return
+     * @throws IOException
+     */
+    @Override
     public LinkedList<String> desplegarDesdeRango(int rangoMaximo, LinkedList<String> listaCargada) throws IOException {
         LinkedList<String> listaNueva = new LinkedList<>();
         String[][] matriz = new String[rangoMaximo][2];
