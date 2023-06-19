@@ -1,3 +1,6 @@
+import Clases.NodosYListas.Basicos.ListaNodosBasico;
+import Clases.NodosYListas.PrimEvol.ListaNodosPrimera;
+import Clases.NodosYListas.SegunEvol.ListaNodosSegundo;
 import Modulos.*;
 import ucn.StdIn;
 import ucn.StdOut;
@@ -20,6 +23,10 @@ public class Main {
     public static void menuPrincipal() throws IOException {
         SistemaImpl sistema = new SistemaImpl();
         LinkedList<String> listaCargada = sistema.cargar();
+        ListaNodosBasico listaBasicos = sistema.cargarPokemonesBasico(listaCargada);
+        ListaNodosPrimera listaPrimeros = sistema.cargarPokemonesPrimera(listaCargada);
+        ListaNodosSegundo listaSegundos = sistema.cargarPokemonesSegunda(listaCargada);
+
 
         StdOut.println("========================================================");
         StdOut.println("======================Bienvenido/a======================");
@@ -45,14 +52,18 @@ public class Main {
                 }
                 StdOut.println("========================================================");
                 break;
-            case "2":
+            /*case "2":
+                listanueva = sistema.desplegarTodos(listaCargada);
+                for (String s : listanueva) {
+                    StdOut.println(s);
+                }
                 break;
             case "3":
                 break;
             case "4":
                 break;
             case "5":
-                break;
+                break;*/
             default:
                 throw new ArrayIndexOutOfBoundsException("Se ha especificado una opcion no valida.");
         }

@@ -1,6 +1,12 @@
 package Modulos;
 
-import ucn.*;
+import Clases.NodosYListas.Basicos.ListaNodosBasico;
+import Clases.NodosYListas.PrimEvol.ListaNodosPrimera;
+import Clases.NodosYListas.SegunEvol.ListaNodosSegundo;
+import Clases.Objetos.PokemonBasico;
+import Clases.Objetos.PokemonPrimeraEvol;
+import Clases.Objetos.PokemonSegundaEvol;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -14,18 +20,15 @@ public class SistemaImpl implements Sistema{
 
     @Override
     public LinkedList<String> cargar() throws IOException {
-        ArchivoEntrada archEntry = new ArchivoEntrada("kanto.txt");
-        Registro reg = archEntry.getRegistro();
 
         Scanner scanner = new Scanner(new File("kanto.txt"));
-        LinkedList<String> lista = new LinkedList<String>();
+        LinkedList<String> lista = new LinkedList<>();
 
         while (scanner.hasNextLine()) {
             String token = scanner.nextLine();
 
             if (!token.equals("")) {
-                String str = token.replace(" ", "");;
-                String[] tokens = str.split(",");
+                String str = token.replace(" ", "");
 
                 lista.add(str);
             }
@@ -33,9 +36,8 @@ public class SistemaImpl implements Sistema{
         return lista;
     }
 
-    /*@Override
-    public ListaNodosBasico cargarPokemonesBasico() throws IOException {
-        LinkedList<String> listaCargada = cargar();
+    @Override
+    public ListaNodosBasico cargarPokemonesBasico(LinkedList<String> listaCargada) throws IOException {
         ListaNodosBasico listaNodosBasico = new ListaNodosBasico();
 
         for (String s : listaCargada) {
@@ -82,26 +84,32 @@ public class SistemaImpl implements Sistema{
     }
 
     @Override
-    public ListaNodosPrimera cargarPokemonesPrimera() throws IOException {
-        LinkedList<String> listaCargada = cargar();
-        Scanner scanner = new Scanner(String.valueOf(listaCargada));
+    public ListaNodosPrimera cargarPokemonesPrimera(LinkedList<String> listaCargada) throws IOException {
         ListaNodosPrimera listaNodosPrimera = new ListaNodosPrimera();
 
-        while (scanner.hasNextLine()) {
-            String token = scanner.nextLine();
+        for (String s : listaCargada) {
+            String[] tokens = s.split(",");
 
-            if (!token.equals("")) {
-                String str = token;
-                String[] tokens = str.split(",");
-
-                if (tokens[2].equalsIgnoreCase("Primera Evolucion")) { //Caso cuando su etapa sea de pokemones BÁSICOS
-                    if (tokens.length == 6) {
-                        PokemonPrimeraEvol pokemonPrimeraEvol = new PokemonPrimeraEvol(tokens[0], tokens[1], tokens[2], tokens[4], tokens[5], "null", tokens[3]);
-                        listaNodosPrimera.insertarAlFinalConCola(pokemonPrimeraEvol);
-                    } else {
-                        PokemonPrimeraEvol pokemonPrimeraEvol = new PokemonPrimeraEvol(tokens[0], tokens[1], tokens[2], tokens[5], tokens[6], tokens[3], tokens[4]);
-                        listaNodosPrimera.insertarAlFinalConCola(pokemonPrimeraEvol);
-                    }
+            if (tokens[2].equalsIgnoreCase("Primera Evolucion")) { //Caso cuando su etapa sea de pokemones de PRIMERA EVOLUCION
+                if (tokens.length == 6) {
+                    String ID = tokens[0];
+                    String nombre = tokens[1];
+                    String etapa = tokens[2];
+                    String invol = tokens[3];
+                    String tipo1 = tokens[4];
+                    String tipo2 = tokens[5];
+                    PokemonPrimeraEvol pokemonPrimeraEvol = new PokemonPrimeraEvol(ID, nombre, etapa,tipo1,tipo2,"null",invol);
+                    listaNodosPrimera.insertarAlFinalConCola(pokemonPrimeraEvol);
+                } else {
+                    String ID = tokens[0];
+                    String nombre = tokens[1];
+                    String etapa = tokens[2];
+                    String evol = tokens[3];
+                    String invol = tokens[4];
+                    String tipo1 = tokens[5];
+                    String tipo2 = tokens[6];
+                    PokemonPrimeraEvol pokemonPrimeraEvol = new PokemonPrimeraEvol(ID, nombre, etapa,tipo1,tipo2,evol,invol);
+                    listaNodosPrimera.insertarAlFinalConCola(pokemonPrimeraEvol);
                 }
             }
         }
@@ -109,27 +117,38 @@ public class SistemaImpl implements Sistema{
     }
 
     @Override
-    public ListaNodosSegundo cargarPokemonesSegunda() throws IOException {
-        LinkedList<String> listaCargada = cargar();
-        Scanner scanner = new Scanner(String.valueOf(listaCargada));
+    public ListaNodosSegundo cargarPokemonesSegunda(LinkedList<String> listaCargada) throws IOException {
         ListaNodosSegundo listaNodosSegundo = new ListaNodosSegundo();
 
-        while (scanner.hasNextLine()) {
-            String token = scanner.nextLine();
+        for (String s : listaCargada) {
+            String[] tokens = s.split(",");
 
-            if (!token.equals("")) {
-                String str = token;
-                String[] tokens = str.split(",");
-
-                if (tokens[2].equalsIgnoreCase("Segunda Evolucion")) { //Caso cuando su etapa sea de pokemones BÁSICOS
-                    PokemonSegundaEvol pokemonSegundaEvol = new PokemonSegundaEvol(tokens[0], tokens[1], tokens[2], tokens[5], tokens[6], tokens[3], tokens[4]);
+            if (tokens[2].equalsIgnoreCase("Segunda Evolucion")) { //Caso cuando su etapa sea de pokemones de SEGUNDA EVOLUCION
+                if (tokens.length == 6) {
+                    String ID = tokens[0];
+                    String nombre = tokens[1];
+                    String etapa = tokens[2];
+                    String invol1 = "null";
+                    String invol2 = tokens[3];
+                    String tipo1 = tokens[4];
+                    String tipo2 = tokens[5];
+                    PokemonSegundaEvol pokemonSegundaEvol = new PokemonSegundaEvol(ID, nombre, etapa, tipo1, tipo2,invol1,invol2);
+                    listaNodosSegundo.insertarAlFinalConCola(pokemonSegundaEvol);
+                } else {
+                    String ID = tokens[0];
+                    String nombre = tokens[1];
+                    String etapa = tokens[2];
+                    String invol1 = tokens[3];
+                    String invol2 = tokens[4];
+                    String tipo1 = tokens[5];
+                    String tipo2 = tokens[6];
+                    PokemonSegundaEvol pokemonSegundaEvol = new PokemonSegundaEvol(ID, nombre, etapa, tipo1, tipo2,invol1,invol2);
                     listaNodosSegundo.insertarAlFinalConCola(pokemonSegundaEvol);
                 }
             }
         }
         return listaNodosSegundo;
-    }*/ //Codigo no utilizado, hiatus.
-
+    }
 
     public LinkedList<String> desplegarDesdeRango(int rangoMaximo, LinkedList<String> listaCargada) throws IOException {
         LinkedList<String> listaNueva = new LinkedList<>();
@@ -142,20 +161,17 @@ public class SistemaImpl implements Sistema{
             int j = 0;
             while (true) {
                 if (i < rangoMaximo) {
-                    String nuevoString1 = null;
                     for (String s : listaCargada) {
                         String[] tokens = s.split(",", 2);
-                        if (j == 0) {
-                            matriz[i][j] = tokens[0];
-                            nuevoString1 = tokens[0];
-                            j++;
-                            matriz[i][j] = tokens[1];
-                            j = 0;
-                            i++;
-                            String nuevoString2 = tokens[1];
-                            String cadenaCompleta = (nuevoString1+","+nuevoString2);
-                            listaNueva.add(cadenaCompleta);
-                        }
+                        matriz[i][j] = tokens[0];
+                        String nuevoString1 = tokens[0];
+                        j++;
+                        matriz[i][j] = tokens[1];
+                        j = 0;
+                        i++;
+                        String nuevoString2 = tokens[1];
+                        String cadenaCompleta = (nuevoString1+","+nuevoString2);
+                        listaNueva.add(cadenaCompleta);
 
                         if (i==rangoMaximo) {
                             break;
@@ -203,9 +219,71 @@ public class SistemaImpl implements Sistema{
         return listaNueva;
     }
 
-    @Override
-    public void desplegarTodos(LinkedList<String> listaCargada) throws IOException {
+    //Sin funcionalidad...
+    /*@Override
+    public LinkedList<String> desplegarTodos(LinkedList<String> listaCargada) throws IOException {
+        LinkedList<String> pokemones = new LinkedList<>();
+        int cantidad = listaCargada.size();
+        String[][] matriz = new String[cantidad][3];
 
+        while (true) {
+            int i = 0;
+            int j = 0;
+            if (i < listaCargada.size()) {
+                for (String s : listaCargada) {
+                    String[] tokens = s.split(",", 3);
+                    matriz[i][j] = tokens[0];
+                    String nuevoString1 = tokens[0];
+                    j++;
+                    matriz[i][j] = tokens[1];
+                    String nuevoString2 = tokens[1];
+                    j++;
+                    matriz[i][j] = tokens[2];
+                    String nuevoString3 = tokens[2];
+                    String cadenaCompleta = (nuevoString1+","+nuevoString2+","+nuevoString3);
+                    pokemones.add(cadenaCompleta);
+                    j = 0;
+                    i++;
+                }
+            }
+            break;
+        }
+
+        for (int i=0; i<cantidad; i++) {
+            for (int j=0; j<2; j++) {
+                for (int x=0; x<cantidad; x++) {
+                    if (matriz[i][1].compareTo(matriz[x][1]) < 0) {
+                        matriz[i][j] = matriz[i][j];
+                    } else {
+                        String tempo = matriz[x][0];
+                        String tempo1 = matriz[x][0 + 1];
+                        String tempo2 = matriz[x][0 + 2];
+
+                        matriz[x][0] = matriz[i][j];
+                        matriz[x][0 + 1] = matriz[i][j + 1];
+                        matriz[x][0 + 2] = matriz[i][j + 2];
+                        matriz[i][j] = tempo;
+                        matriz[i][j + 1] = tempo1;
+                        matriz[i][j + 2] = tempo2;
+                    }
+                    if (matriz[i][1].compareTo(matriz[x][1]) < 0) {
+                        matriz[i][j] = matriz[i][j];
+                    } else {
+                        String tempo = matriz[x][1];
+                        String tempo1 = matriz[x][1 + 1];
+                        String tempo2 = matriz[x][1 + 2];
+
+                        matriz[x][1] = matriz[i][j];
+                        matriz[x][1 + 1] = matriz[i][j + 1];
+                        matriz[x][1 + 2] = matriz[i][j + 2];
+                        matriz[i][j] = tempo;
+                        matriz[i][j + 1] = tempo1;
+                        matriz[i][j + 2] = tempo2;
+                    }
+                }
+            }
+        }
+        return pokemones;
     }
 
     @Override
@@ -221,5 +299,5 @@ public class SistemaImpl implements Sistema{
     @Override
     public void busquedaPersonalizada(String nombre, String id, LinkedList<String> listaCargada) {
 
-    }
+    }*/
 }
